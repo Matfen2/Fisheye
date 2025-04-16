@@ -1,31 +1,25 @@
-// Fonction qui récupère les données des photographes depuis le fichier JSON
+// Récupère les données du JSON
 async function getPhotographers() {
-    // On effectue une requête HTTP pour charger le fichier JSON
-    const response = await fetch('data/photographers.json');
-
-    // On transforme la réponse en objet JavaScript
+    const response = await fetch("data/photographers.json");
     const data = await response.json();
-
-    // On retourne l'objet contenant les photographes
     return data;
 }
 
-// Fonction pour afficher les photographes sur la page d’accueil
+// Affiche toutes les cartes sur la page d’accueil
 async function displayData(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
 
-    // Pour chaque photographe, on crée et insère sa "carte" dans le DOM
     photographers.forEach((photographer) => {
-        const photographerModel = photographerTemplate(photographer); // création du modèle
-        const userCardDOM = photographerModel.getUserCardDOM(); // génération du DOM
-        photographersSection.appendChild(userCardDOM); // insertion dans la page
+        const photographerModel = photographerTemplate(photographer);
+        const userCardDOM = photographerModel.getUserCardDOM();
+        photographersSection.appendChild(userCardDOM);
     });
 }
 
-// Fonction principale appelée au démarrage
+// Initialise la page
 async function init() {
-    const { photographers } = await getPhotographers(); // récupération des données
-    displayData(photographers); // affichage dans le DOM
+    const { photographers } = await getPhotographers();
+    displayData(photographers);
 }
 
-init(); // Démarrage du script
+init();

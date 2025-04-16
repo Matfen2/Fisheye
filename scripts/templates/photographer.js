@@ -1,55 +1,82 @@
-// Fonction modèle pour créer un objet DOM représentant un photographe
+// Fonction qui génère un modèle de photographe à partir de ses données
 function photographerTemplate(data) {
-    // On extrait les propriétés utiles du photographe
+    // Déstructure les données du photographe
     const { city, country, id, name, portrait, tagline, price } = data;
-
-    // Construction du chemin vers l’image de portrait
-    const picture = `assets/photographers/${portrait}`;
-
-    // Fonction qui crée tout le HTML d’une "carte photographe"
+    const picture = `assets/photographers/${portrait}`; // chemin de l'image
+  
+    // Génère une carte pour la page d'accueil
     function getUserCardDOM() {
-        // Création d’un conteneur principal
-        const article = document.createElement("article");
-
-        // Création d’un lien vers la page individuelle du photographe
-        const link = document.createElement("a");
-        link.setAttribute("href", `photographer.html?id=${id}`);
-        link.setAttribute("aria-label", name); // pour l’accessibilité
-
-        // Image du photographe
-        const img = document.createElement("img");
-        img.setAttribute("src", picture);
-        img.setAttribute("alt", `Portrait de ${name}`);
-        img.classList.add("profile-img"); // classe CSS pour la mise en forme
-
-        // Nom du photographe
-        const h2 = document.createElement("h2");
-        h2.textContent = name;
-
-        // Lieu (ville, pays)
-        const location = document.createElement("p");
-        location.classList.add("country");
-        location.textContent = `${city}, ${country}`;
-
-        // Slogan du photographe
-        const taglineElem = document.createElement("p");
-        taglineElem.classList.add("tagline");
-        taglineElem.textContent = tagline;
-
-        // Prix à la journée
-        const priceElem = document.createElement("p");
-        priceElem.classList.add("price");
-        priceElem.textContent = `${price}€/jour`;
-
-        // Ajout de l’image et du nom dans le lien
-        link.appendChild(img);
-
-        // Ajout de tous les éléments à l’article
-        article.append(link, h2, location, taglineElem, priceElem);
-
-        return article; // On retourne l’élément DOM complet
+      const article = document.createElement("article");
+  
+      // Lien vers la page du photographe
+      const link = document.createElement("a");
+      link.setAttribute("href", `photographer.html?id=${id}`);
+      link.setAttribute("aria-label", name);
+  
+      // Image du photographe
+      const img = document.createElement("img");
+      img.setAttribute("src", picture);
+      img.setAttribute("alt", `Portrait de ${name}`);
+      img.classList.add("profile-img");
+  
+      // Nom, localisation, slogan et prix
+      const h2 = document.createElement("h2");
+      h2.textContent = name;
+  
+      const location = document.createElement("p");
+      location.classList.add("country");
+      location.textContent = `${city}, ${country}`;
+  
+      const taglineElem = document.createElement("p");
+      taglineElem.classList.add("tagline");
+      taglineElem.textContent = tagline;
+  
+      const priceElem = document.createElement("p");
+      priceElem.classList.add("price");
+      priceElem.textContent = `${price}€/jour`;
+  
+      // Assemble les éléments
+      link.appendChild(img);
+      article.append(link, h2, location, taglineElem, priceElem);
+      return article;
     }
-
-    // On retourne le modèle avec ses données et sa fonction de génération
-    return { name, picture, getUserCardDOM };
-}
+  
+    // Génère le header de la page photographe.html
+    function cardPhotographer() {
+      const btnContact = document.querySelector(".contact_button");
+  
+      const info = document.createElement("div");
+      info.classList.add("photograph-info");
+  
+      const h1 = document.createElement("h1");
+      h1.classList.add("photograph-name");
+      h1.textContent = name;
+  
+      const h2 = document.createElement("h2");
+      h2.classList.add("photograph-country");
+      h2.textContent = `${city}, ${country}`;
+  
+      const p = document.createElement("p");
+      p.classList.add("photograph-tagline");
+      p.textContent = tagline;
+  
+      // Image du photographe à droite
+      const imgContainer = document.createElement("div");
+      imgContainer.classList.add("img-container");
+  
+      const img = document.createElement("img");
+      img.classList.add("photograph-image");
+      img.setAttribute("src", picture);
+      img.setAttribute("alt", name);
+  
+      // Assemble les éléments dans le header
+      imgContainer.appendChild(img);
+      info.append(h1, h2, p);
+      btnContact.before(info);
+      btnContact.after(imgContainer);
+    }
+  
+    // Retourne les fonctions disponibles à l'extérieur
+    return { name, picture, cardPhotographer, getUserCardDOM };
+  }
+  

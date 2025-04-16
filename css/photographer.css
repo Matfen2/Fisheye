@@ -1,24 +1,7 @@
+/* --- MODALE DE CONTACT --- */
+
 #contact_modal {
     display: none;
-}
-
-.photograph-header {
-    background-color: #FAFAFA;
-    height: 300px;
-    margin: 0 100px;
-}
-
-.contact_button {
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    padding: 11px;
-    width: 170px;
-    height: 70px;
-    border: none;
-    background-color: #901C1C;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
 .modal {
@@ -73,4 +56,177 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+}
+
+/* --- HEADER PHOTOGRAPHE --- */
+
+.photograph-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 40px;
+    background-color: #FAFAFA;
+    border-radius: 10px;
+    margin: 40px 100px;
+  }
+  
+
+/* Bouton "Contactez-moi" */
+.contact_button {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    padding: 11px;
+    width: 170px;
+    height: 70px;
+    border: none;
+    background-color: #901C1C;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.contact_button:hover {
+    background-color: var(--secondary);
+    color: black;
+}
+
+/* Infos du photographe */
+.photograph-info {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    margin-top: -20px;
+    padding-left: 45px;
+  }
+  
+  .photograph-name {
+    font-size: 64px;
+    font-weight: bold;
+    color: #D3573C;
+  }
+  
+  .photograph-country {
+    font-size: 24px;
+    color: #901C1C;
+    margin-top: -42px;
+  }
+  
+  .photograph-tagline {
+    font-size: 18px;
+    color: #525252;
+  }
+  
+  .img-container {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+
+/* --- TRI --- */
+
+.sort-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 30px 100px 20px;
+}
+
+.sort-container label {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.custom-select select {
+    background-color: #901C1C;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* --- GALERIE DE MÉDIAS --- */
+.media-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes fixes */
+    column-gap: 60px; /* espace horizontal entre les colonnes */
+    row-gap: 40px;    /* espace vertical entre les lignes */
+    margin: 0 100px;
+}
+
+.media-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 10px;
+}
+
+.media-card img,
+.media-card video {
+    width: 100%;
+    height: 300px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.media-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+    padding: 0 5px;
+}
+
+.media-info h3 {
+    font-size: 18px;
+    font-weight: 500;
+    color: #901C1C;
+    margin: 0;
+}
+
+.likes-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #901C1C;
+}
+
+.heart {
+    color: #901C1C;
+}
+
+/* --- BLOC FIXE LIKES + TARIF --- */
+
+.like-price-box {
+    position: fixed;
+    bottom: 20px;
+    right: 40px;
+    background-color: #DB8876;
+    color: black;
+    font-size: 20px;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    z-index: 999;
+}
+
+.likes-total,
+.price {
+    font-weight: bold;
 }
