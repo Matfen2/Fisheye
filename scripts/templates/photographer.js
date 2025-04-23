@@ -1,46 +1,52 @@
 const photographerTemplate = (data) => {
-    const { city, country, id, name, portrait, price, tagline } = data;
-  
-    const picture = `assets/photographers/${portrait}`;
-  
-    const getUserCardDOM = () => {
-      //créer le lien qui contient image et le nom du photographe
-      const link = document.createElement("a");
-      const article = document.createElement("article");
-      const img = document.createElement("img");
-  
-      link.setAttribute("href", `photographer.html?id=${id}`);
-  
-      img.setAttribute("src", picture);
-      img.setAttribute("id", id);
-      img.setAttribute("alt", `Portrait de ${name}`);
-      const h2 = document.createElement("h2");
-      h2.textContent = name;
-  
-      link.append(img, h2);
-  
-      //créer la description du photographe
-      const descriptionBox = document.createElement("div");
-      const h3 = document.createElement("h3");
-      const p1 = document.createElement("p");
-      const p2 = document.createElement("p");
-  
-      descriptionBox.classList.add("description");
-      descriptionBox.setAttribute("tabindex", "0")
-      h3.classList.add("country");
-      p1.classList.add("tagline");
-      p2.classList.add("price");
-  
-      h3.textContent = `${city}, ${country}`;
-      p1.textContent = tagline;
-      p2.textContent = `${price}€/jour`;
-  
-      descriptionBox.append(h3, p1, p2);
-      article.append(link, descriptionBox);
-  
-      return article;
-    }
-  
+  // Déstructuration des données du photographe
+  const { city, country, id, name, portrait, price, tagline } = data;
+
+  // Création du chemin vers l'image du photographe
+  const picture = `assets/photographers/${portrait}`;
+
+  const getUserCardDOM = () => {
+    const link = document.createElement("a");
+    const article = document.createElement("article");
+    const img = document.createElement("img");
+
+    // Le lien mène à la page détaillée du photographe
+    link.setAttribute("href", `photographer.html?id=${id}`);
+    img.setAttribute("src", picture);
+    img.setAttribute("id", id);
+    img.setAttribute("alt", `Portrait de ${name}`);
+
+    const h2 = document.createElement("h2");
+    h2.textContent = name;
+
+    // Le lien contient l'image et le nom
+    link.append(img, h2);
+
+    // Description contenant la localisation, tagline et tarif
+    const descriptionBox = document.createElement("div");
+    const h3 = document.createElement("h3");
+    const p1 = document.createElement("p");
+    const p2 = document.createElement("p");
+
+    descriptionBox.classList.add("description");
+    descriptionBox.setAttribute("tabindex", "0"); // Accessibilité clavier
+    h3.classList.add("country");
+    p1.classList.add("tagline");
+    p2.classList.add("price");
+
+    h3.textContent = `${city}, ${country}`;
+    p1.textContent = tagline;
+    p2.textContent = `${price}€/jour`;
+
+    descriptionBox.append(h3, p1, p2);
+
+    // Article final contenant tout
+    article.append(link, descriptionBox);
+
+    return article;
+  };
+
+  // Affichage des informations du photographe sur sa page dédiée (photographer.html).
     const cardPhotographer = () => {
       const btnContact = document.querySelector(".contact_button");
   

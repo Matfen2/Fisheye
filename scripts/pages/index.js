@@ -1,23 +1,36 @@
 const displayData = (photographers) => {
-    const photographersSection = document.querySelector(".photographer_section");
+  // On sélectionne la section du DOM où les cartes des photographes seront affichées
+  const photographersSection = document.querySelector(".photographer_section");
+
+  // Pour chaque photographe, on génère une carte DOM et on l'ajoute à la page
+  photographers.forEach((photographer) => {
+    // Création d’un modèle DOM pour le photographe à partir des données
+    const photographerModel = photographerTemplate(photographer);
+
+    // Récupère l'élément DOM prêt à être inséré dans la page (la carte du photographe)
+    const userCardDOM = photographerModel.getUserCardDOM();
+
+    // Ajoute la carte du photographe à la section principale
+    photographersSection.appendChild(userCardDOM);
+  });
+};
+
   
-    photographers.forEach((photographer) => {
-      const photographerModel = photographerTemplate(photographer);
-      const userCardDOM = photographerModel.getUserCardDOM();
-      photographersSection.appendChild(userCardDOM);
-    });
+const initPageIndex = async () => {
+  try {
+    // Récupération des données des photographes à partir du fichier JSON (appel asynchrone)
+    const photographers = await getPhotographers("data/photographers.json");
+
+    // Affiche les données dans la console pour le debug
+    console.log(photographers);
+
+    // Appelle la fonction d'affichage avec les données récupérées
+    displayData(photographers);
+  } catch (err) {
+    // Gestion des erreurs lors de la récupération des données
+    console.error(err);
   }
-  
-  const initPageIndex = async () => {
-    try {
-      const photographers = await getPhotographers(
-        "data/photographers.json"
-      );
-      console.log(photographers);
-      displayData(photographers);
-  
-    } catch (err) {
-      console.error(err);
-    }
-  }
-  initPageIndex();
+};
+
+// Lancement de la page avec récupération et affichage des photographes
+initPageIndex();
