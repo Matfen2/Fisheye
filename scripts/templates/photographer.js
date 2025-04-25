@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 const photographerTemplate = (data) => {
   // Déstructuration des données du photographe
   const { city, country, id, name, portrait, price, tagline } = data;

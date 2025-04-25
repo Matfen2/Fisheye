@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 const getPhotographers = async (url)=> {
         try {
           const api = await fetch(url);
@@ -14,6 +15,7 @@ const getPhotographers = async (url)=> {
         }
 }
 
+// eslint-disable-next-line no-unused-vars
 const getMedia = async (url) => {
   try {
     const api = await fetch(url);

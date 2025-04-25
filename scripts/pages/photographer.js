@@ -1,3 +1,6 @@
+/* global factory, mediaTemplate, photographerTemplate, photographerTemplate, getPhotographers, getPhotographers, getMedia */
+
+
 ///////////// DOM ELEMENTS //////////////
 const body = document.querySelector("body");
 const main = document.querySelector("#main");
@@ -16,38 +19,28 @@ const dropdownMenuItems = Array.from(dropdownMenu.children);
 const arrowUp = document.querySelector(".chevron-up");
 const arrowDown = document.querySelector(".chevron-down");
 
-///variable pour gérer 
-let isClicked = false;
-
-
+let isClicked = false; // État du dropdown
 
 //////////////ASYNC FUNCTION POUR RECUPERE LES DATAS DU PHOTOGRAPHE ET SES MEDIAS//////////
-getData = async (photographersJson, mediaJson) => {
+
+// Fonction pour récupérer les données du photographe et de ses médias
+const getData = async (photographersJson, mediaJson) => {
   try {
-    const id = getId();
+    const id = getId(); // récupère l'id depuis l'URL
 
-    const photographerFound = photographersJson.find(
-      (photographer) => photographer.id === id
-    );
-    if (!photographerFound) location.href = "index.html";
+    // Recherche du photographe par ID
+    const photographerFound = photographersJson.find(p => p.id === id);
+    if (!photographerFound) location.href = "index.html"; // redirection si non trouvé
 
-    // chercher les médias du photographe selon son id et retourner en objet du factory
+    // Filtrer les médias qui appartiennent à ce photographe
     const mediaFound = mediaJson
       .filter((media) => media.photographerId === id)
-      .map((media) => {
-        try {
-          return factory(media)
-        }catch(e){
-          console.error(e);
-        }
-      });
+      .map((media) => factory(media)); // utilisation du pattern Factory pour chaque média
 
-    //calculer la somme des likes des médias du photographe
+    // Calcul du total des likes
     const mediaLikes = mediaFound
       .map((media) => media.likes)
       .reduce((acc, current) => acc + current, 0);
-
-    // mettre à jour l'objet du photographe avec la somme des likes des médias
     photographerFound.sumOfLikes = mediaLikes;
 
     return { photographerFound, mediaFound };
@@ -59,6 +52,7 @@ getData = async (photographersJson, mediaJson) => {
 const getId = () => {
   let urlParams = new URLSearchParams(window.location.search);
   let url = window.location.href;
+  console.log("URL actuelle :", url);
   if (urlParams.size > 0) {
     const id = Number(urlParams.get("id"));
     return id;
@@ -272,7 +266,7 @@ const addEventListenerArrowLeft = (dataMedias) => {
 //Aller vers le media suivant
 ////1.btn suivant
 const addEventHandlerNextLightBox = (dataMedias) => {
-  btnNext.addEventListener("click", function (e) {
+  btnNext.addEventListener("click", function () {
     goToNextMedia(dataMedias);
   });
 }
@@ -385,8 +379,8 @@ document.addEventListener("keydown", (e) => {
     closeDropdownMenu();
   }
 });
-/// trier avec clavier
 
+/// trier avec clavier
 dropdownToggle.addEventListener("click", (e) => {
   if (!e.target) return;
   if (!isClicked) {

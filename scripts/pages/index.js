@@ -1,3 +1,4 @@
+/* global photographerTemplate, getPhotographers */
 const displayData = (photographers) => {
   // On sélectionne la section du DOM où les cartes des photographes seront affichées
   const photographersSection = document.querySelector(".photographer_section");
@@ -21,10 +22,9 @@ const initPageIndex = async () => {
     // Récupération des données des photographes à partir du fichier JSON (appel asynchrone)
     const photographers = await getPhotographers("data/photographers.json");
 
-    // Affiche les données dans la console pour le debug
-    console.log(photographers);
 
-    // Appelle la fonction d'affichage avec les données récupérées
+
+    // Appelle la fonction d'affichage avec les données récupérées de photograph.js (pages) l-164
     displayData(photographers);
   } catch (err) {
     // Gestion des erreurs lors de la récupération des données
